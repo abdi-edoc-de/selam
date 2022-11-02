@@ -49,17 +49,17 @@ export default function Div() {
     let sum = 0;
     let res = [];
     console.log(ords, "here");
-    // let nums = 0;
+    let nums = 0;
     ords.forEach((element, ind) => {
       if (rows[element]) {
-        if (ind === 0) {
-          st += `${rows[element]["Date"]}\n`;
+        if (nums === 0) {
+          st += `Date: ${rows[element]["Date"]}\n\n`;
         }
-        if (ind % 10 === 0 && !ind === 0) {
+        if (nums % 9 === 0 && !nums === 0) {
           res.push(st);
           st = "";
         }
-        st += `${ind + 1}:- ${rows[element]["Receiver"]} \n`;
+        st += `${nums + 1}:- ${rows[element]["Receiver"]} \n`;
         if (rows[element]["Receiver Phone"].length >= 10) {
           st += `${rows[element]["Receiver Phone"]} \n`;
         }
@@ -70,6 +70,7 @@ export default function Div() {
         )} BIRR \n`;
         st += "\n------------End------------\n";
         sum += parseInt(rows[element]["Total Pay Receiver"]);
+        nums++;
       }
     });
     st += "";
