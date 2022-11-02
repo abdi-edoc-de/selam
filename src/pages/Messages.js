@@ -57,7 +57,6 @@ export default function Div() {
         if (nums % 7 === 0 && nums!==0) {
           res.push(st);
           st = "";
-          console.log(res, nums, "here")
         }
         st += `${nums + 1}:- ${rows[element]["Receiver"]} \n`;
         if (rows[element]["Receiver Phone"].length >= 10) {

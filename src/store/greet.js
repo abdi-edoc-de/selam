@@ -46,7 +46,8 @@ const slice = createSlice({
         },
         removeName : (greet , action) => {
             greet.names = greet.names.filter(name => name !== action.payload.name)
-            greet.assignOrders[action.payload.name].forEach(id => greet.rows[id].Assign = "Hold")
+            greet.assignOrders[action.payload.name].forEach(id =>{
+                 if (greet.rows[id]){greet.rows[id].Assign = "Hold"}})
             delete greet.assignOrders[action.payload.name]
         },
         setAssign : (greet, action) => {
