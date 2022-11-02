@@ -78,13 +78,8 @@ export default function Home() {
               type="file"
               onChange={(e) => {
                 const file = e.target.files[0];
-
                 readExcel(file);
-                if (file.Length > 0) {
-                  console.log(file);
-                }
                 dispatch(setFileName({ fileName: file.name }));
-                console.log(file);
               }}
               hidden
             />

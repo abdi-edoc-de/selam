@@ -6,7 +6,6 @@ import { setUrgency} from '../store/greet';
 
 export default function UrgentContr(props) {
   const {speed, id} = props
-  console.log(speed)
   const [value, setValue] = React.useState(speed);
   const [inputValue, setInputValue] = React.useState('');
   const options = ["Regular", "Urgent", "Top Urgent"]

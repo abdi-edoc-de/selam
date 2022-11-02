@@ -48,16 +48,16 @@ export default function Div() {
     let dollarUSLocale = Intl.NumberFormat("en-US");
     let sum = 0;
     let res = [];
-    console.log(ords, "here");
     let nums = 0;
     ords.forEach((element, ind) => {
       if (rows[element]) {
         if (nums === 0) {
           st += `Date: ${rows[element]["Date"]}\n\n`;
         }
-        if (nums % 9 === 0 && !nums === 0) {
+        if (nums % 7 === 0 && nums!==0) {
           res.push(st);
           st = "";
+          console.log(res, nums, "here")
         }
         st += `${nums + 1}:- ${rows[element]["Receiver"]} \n`;
         if (rows[element]["Receiver Phone"].length >= 10) {
@@ -70,13 +70,15 @@ export default function Div() {
         )} BIRR \n`;
         st += "\n------------End------------\n";
         sum += parseInt(rows[element]["Total Pay Receiver"]);
-        nums++;
+        nums= nums + 1;
+        
       }
     });
     st += "";
     st += `sum = ${dollarUSLocale.format(sum)}\n-----End-----\n`;
     st += "";
     res.push(st);
+    console.log(res)
     return res;
   };
 
@@ -106,7 +108,7 @@ export default function Div() {
         return (
           <TabPanel value={value} index={ind}>
             {items.map((st, i) => (
-              <TE txt={st} />
+              <TE txt={st} key={i}/>
             ))}
           </TabPanel>
         );

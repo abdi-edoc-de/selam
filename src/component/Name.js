@@ -34,7 +34,6 @@ export default function NameSelelction() {
       return
     }
     dispatch(addName({name:name}))
-    console.log(names)
     setName('')
 
   }
@@ -77,7 +76,6 @@ export default function NameSelelction() {
     value={name}
     onChange = {(e) => setName(e.target.value)}
     onKeyPress={(ev) => {
-      console.log(`Pressed keyCode ${ev.key}`);
       if (ev.key === 'Enter') {
         // Do code here
         ev.preventDefault();

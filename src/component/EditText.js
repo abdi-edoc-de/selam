@@ -36,7 +36,7 @@ Note: For simplicity purpose, I removed all the classnames, you can check the re
         <div
           onClick={() => setEditing(true)}
           onKeyPress={(ev) => {
-            console.log(`Pressed keyCode ${ev.key}`);
+
             if (ev.key === 'Enter') {
               // Do code here
               ev.preventDefault();
