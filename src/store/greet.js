@@ -35,6 +35,9 @@ const slice = createSlice({
             Object.entries(greet.rows).forEach(([key, _]) => {
                 greet.assignOrders.Hold.push(key)
             })
+            greet.names.forEach(name => {
+                greet.assignOrders[name] = []
+            })
         },
         addName : (greet , action) => {
             greet.names.push(action.payload.name)

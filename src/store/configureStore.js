@@ -9,8 +9,9 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);
-export default () =>
+const configureSt = () =>
   configureStore({
     reducer: persistedReducer,
-    devTools: process.env.NODE_ENV !== 'production',
+    devTools: process.env.NODE_ENV !== "production",
   });
+  export default configureSt

@@ -5,9 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getNames , setAssign, getAssign} from '../store/greet';
 
 export default function ControllableStates(props) {
-  const {assign, id} = props
+  const { id} = props
   const val = useSelector(state => getAssign(state, id))
-  const [value, setValue] = React.useState(assign);
   const [inputValue, setInputValue] = React.useState('');
   const options = useSelector(state => getNames(state))
   const dispatch = useDispatch()
@@ -16,7 +15,6 @@ export default function ControllableStates(props) {
       <Autocomplete
         value={val?val:"Hold"}
         onChange={(event, newValue) => {
-          setValue(newValue)
           dispatch(setAssign({id:id, name:newValue}))
         }}
         inputValue={inputValue}

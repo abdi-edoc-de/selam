@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import ControllableStates from './Dropdown'
-import { getColors, editFilds } from '../store/greet';
+import { getColors } from '../store/greet';
 import { useSelector } from 'react-redux';
 import Edit from "../component/Editable";
 import UrgentContr from './Urgent';
@@ -21,7 +21,6 @@ export default function Row(props) {
     const { row, no, id } = props;
     const [open, setOpen] = React.useState(false);
     const colors = useSelector(state => getColors(state))
-    let dollarUSLocale = Intl.NumberFormat('en-US');
     
     return (
       <React.Fragment>
@@ -37,15 +36,6 @@ export default function Row(props) {
           </TableCell>
           <TableCell >
             {1+parseInt(id)}
-            {/* {row['Bank']}
-            {row['Bank Account']}
-            {row['Sender']}
-            {row['Sender Phone']}
-            {row['Receiver']}
-            {row['Receiver Phone']}
-            {row['Net Amount Receiver']}
-            {row['Total']}
-            {row['Total Pay Receiver']} */}
           </TableCell>
           <TableCell >
             <Edit id={id} name="Bank" value={row['Bank']} />

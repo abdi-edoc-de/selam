@@ -6,8 +6,6 @@ export default function Edit(props) {
     const dispatch = useDispatch()
     const {name, value, id, type} = props
     const [task , setTask] = useState(value)
-    let dollarUSLocale = Intl.NumberFormat('en-US');
-    console.log(name, type)
     return (
         <Editable text={task} placeholder="-" type="input">
         <input

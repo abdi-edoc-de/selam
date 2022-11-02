@@ -29,7 +29,7 @@ export default function NameSelelction() {
   const [name, setName] = useState('');
   const names = useSelector(state => getNames(state))
   const handleName = (name) => {
-    if (name.trim() == ''){
+    if (name.trim() === ''){
       setOpen(true)
       return
     }

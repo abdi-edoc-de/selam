@@ -1,20 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setRows,
   getRows,
   getFileName,
   getBanks,
   getFill,
   filter,
 } from "../store/greet";
-import * as XLSX from "xlsx";
 import * as React from "react";
-import NameSelelction from "../component/Name";
 import TableRow from "../component/Tabel";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
-import PostAddIcon from "@mui/icons-material/PostAdd";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 import Chip from "@mui/material/Chip";
@@ -35,10 +31,11 @@ export default function Home() {
   const [max, setMax] = React.useState();
   const banks = ["None", ...useSelector((state) => getBanks(state))];
   React.useEffect(() => {
-    handleFilter();
+    handleFilter(ro);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ro]);
   const dispatch = useDispatch();
-  const handleFilter = () => {
+  const handleFilter = (ro) => {
     dispatch(filter({ min: min, max: max, bank: bank, banks: banks }));
   };
   return (
@@ -113,7 +110,7 @@ export default function Home() {
             variant="contained"
             component="label"
             onClick={() => {
-              handleFilter();
+              handleFilter(ro);
             }}
           >
             {" "}

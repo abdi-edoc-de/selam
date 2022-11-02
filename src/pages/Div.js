@@ -5,7 +5,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useSelector } from "react-redux";
-import { getNames, getRows, getAssignOrders } from "../store/greet";
+import { getRows, getAssignOrders } from "../store/greet";
 import Table from "../component/Tabel";
 import SaveButton from "../component/SaveFile";
 
@@ -49,15 +49,14 @@ export default function Div() {
     setValue(newValue);
   };
   const rows = useSelector((state) => getRows(state));
-  const names = useSelector((state) => getNames(state));
   const orders = useSelector((state) => getAssignOrders(state));
   const filter = (rows, ords) => {
     const res = {};
-    // Object.entries(ords).forEach(([key, value]) => {
-
-    // })
     ords.forEach((element) => {
+      if (rows[element]){
       res[element] = rows[element];
+        
+      }
     });
     return res;
   };

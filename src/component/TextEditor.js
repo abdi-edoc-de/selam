@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import Box from "@mui/material/Box";
 
 import { Editor, EditorState, ContentState } from "draft-js";
