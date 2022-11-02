@@ -49,7 +49,7 @@ export default function Div() {
     let sum = 0;
     let res = [];
     console.log(ords, "here");
-    let nums = 0;
+    // let nums = 0;
     ords.forEach((element, ind) => {
       if (rows[element]) {
         if (ind === 0) {
