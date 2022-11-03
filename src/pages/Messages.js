@@ -54,9 +54,12 @@ export default function Div() {
         if (nums === 0) {
           st += `Date: ${rows[element]["Date"]}\n\n`;
         }
-        if (nums % 7 === 0 && nums!==0) {
+        if (nums % 7 === 0 && nums !== 0) {
           res.push(st);
           st = "";
+        }
+        if (rows[element]["Speed"] !== "Regular") {
+          st += `${rows[element]["Speed"]} \n`
         }
         st += `${nums + 1}:- ${rows[element]["Receiver"]} \n`;
         if (rows[element]["Receiver Phone"].length >= 10) {
@@ -69,15 +72,14 @@ export default function Div() {
         )} BIRR \n`;
         st += "\n------------End------------\n";
         sum += parseInt(rows[element]["Total Pay Receiver"]);
-        nums= nums + 1;
-        
+        nums = nums + 1;
       }
     });
     st += "";
     st += `sum = ${dollarUSLocale.format(sum)}\n-----End-----\n`;
     st += "";
     res.push(st);
-    console.log(res)
+    console.log(res);
     return res;
   };
 
@@ -106,9 +108,14 @@ export default function Div() {
         let items = filter(rows, ids);
         return (
           <TabPanel value={value} index={ind}>
-            {items.map((st, i) => (
-              <TE txt={st} key={i}/>
-            ))}
+            {/* <Grid container spacing={2}>
+              <Grid item xs={8}>
+                <Item>xs=8</Item>
+              </Grid> */}
+              {items.map((st, i) => (
+                <TE txt={st} key={i} />
+              ))}
+            {/* </Grid> */}
           </TabPanel>
         );
       })}
