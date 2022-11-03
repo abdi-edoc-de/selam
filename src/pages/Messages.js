@@ -4,13 +4,13 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useSelector } from "react-redux";
-import { getRows, getAssignOrders } from "../store/greet";
+import { getRows, getAssignOrders, getColors } from "../store/greet";
 import "draft-js/dist/Draft.css";
 import TE from "../component/TextEditor";
+import { color } from "@mui/system";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -37,6 +37,7 @@ function a11yProps(index) {
 
 export default function Div() {
   const [value, setValue] = React.useState(0);
+  // const colors = React.useState(state => getColors(state))
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -59,7 +60,7 @@ export default function Div() {
           st = "";
         }
         if (rows[element]["Speed"] !== "Regular") {
-          st += `${rows[element]["Speed"]} \n`
+          st += `${rows[element]["Speed"]} \n`;
         }
         st += `${nums + 1}:- ${rows[element]["Receiver"]} \n`;
         if (rows[element]["Receiver Phone"].length >= 10) {
@@ -84,41 +85,40 @@ export default function Div() {
   };
 
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        bgcolor: "background.paper",
-        display: "flex",
-        height: "90vh",
-      }}
-    >
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, borderColor: "divider" }}
-      >
-        {Object.entries(orders).map(([name, val], ind) => {
-          return <Tab label={name} {...a11yProps(ind)} />;
-        })}
-      </Tabs>
+    <>
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+        >
+          {Object.entries(orders).map(([name, val], ind) => {
+            return <Tab label={name} {...a11yProps(ind)} />;
+          })}
+        </Tabs>
+      </Box>
       {Object.entries(orders).map(([name, ids], ind) => {
         let items = filter(rows, ids);
         return (
           <TabPanel value={value} index={ind}>
-            {/* <Grid container spacing={2}>
-              <Grid item xs={8}>
-                <Item>xs=8</Item>
-              </Grid> */}
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                p: 1,
+                m: 1,
+                bgcolor: "background.paper",
+                maxWidth: "100%",
+                borderRadius: 1,
+              }}
+            >
               {items.map((st, i) => (
-                <TE txt={st} key={i} />
+                <TE  txt={st} key={i} />
               ))}
-            {/* </Grid> */}
+            </Box>
           </TabPanel>
         );
       })}
-    </Box>
+    </>
   );
 }

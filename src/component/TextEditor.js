@@ -20,7 +20,7 @@ export default function MyEditor(props) {
     },
   };
   return (
-    <div>
+    <Box sx={{my:3}}>
       <Box
         sx={{
         minWidth: 300,
@@ -50,6 +50,6 @@ export default function MyEditor(props) {
           }}
         />
       </Box>
-    </div>
+    </Box>
   );
 }
