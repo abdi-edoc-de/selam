@@ -4,10 +4,9 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useSelector } from "react-redux";
-import { getRows, getAssignOrders, getColors } from "../store/greet";
+import { getRows, getAssignOrders } from "../store/greet";
 import "draft-js/dist/Draft.css";
 import TE from "../component/TextEditor";
-import { color } from "@mui/system";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -37,7 +36,6 @@ function a11yProps(index) {
 
 export default function Div() {
   const [value, setValue] = React.useState(0);
-  // const colors = React.useState(state => getColors(state))
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
