@@ -7,6 +7,7 @@ export default function Edit(props) {
     const {name, value, id, type} = props
     const [task , setTask] = useState(value)
     return (
+      <>
         <Editable text={task} placeholder="-" type="input">
         <input
           name={name}
@@ -27,5 +28,6 @@ export default function Edit(props) {
           }}
         />
       </Editable>
+    </>
     )
 }

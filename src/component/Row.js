@@ -17,7 +17,7 @@ import Edit from "../component/Editable";
 import UrgentContr from "./Urgent";
 import AlertDialogDelete from "./Delete";
 export default function Row(props) {
-  const { row, no, id } = props;
+  const { row, id, no } = props;
   const [open, setOpen] = React.useState(false);
   const colors = useSelector((state) => getColors(state));
 
@@ -40,33 +40,26 @@ export default function Row(props) {
         </TableCell>
         <TableCell>{1 + parseInt(id)}</TableCell>
         <TableCell>
-          <Edit id={id} name="Bank" value={row["Bank"]} />
+          <Edit id={no} name="Bank" value={row["Bank"]} />
         </TableCell>
         <TableCell align="left">
-          <Edit id={id} name="Fee" type="number" value={row["Fee"]} />
+          <Edit id={no} name="Receiver" value={row["Receiver"]} />
+
         </TableCell>
         <TableCell align="left">
-          <Edit
-            id={id}
-            name="Net Amount Receiver"
-            type="number"
-            value={row["Net Amount Receiver"]}
-          />
+          {row["Sender Phone"]}
         </TableCell>
         <TableCell align="left">
           <Edit
-            id={id}
+            id={no}
             name="Rate Change Receiver"
             type="number"
             value={row["Rate Change Receiver"]}
           />
         </TableCell>
         <TableCell align="left">
-          <Edit id={id} name="Total" type="number" value={row["Total"]} />
-        </TableCell>
-        <TableCell align="left">
           <Edit
-            id={id}
+            id={no}
             name="Total Pay Receiver"
             type="number"
             value={row["Total Pay Receiver"]}
@@ -79,7 +72,7 @@ export default function Row(props) {
           <UrgentContr speed={row.Speed} id={no} />
         </TableCell>
         <TableCell align="left">
-          <AlertDialogDelete id={no} />
+          <AlertDialogDelete id={no} row={row} />
         </TableCell>
       </TableRow>
       <TableRow>
@@ -94,9 +87,9 @@ export default function Row(props) {
                   <TableRow>
                     <TableCell align="left">Date</TableCell>
                     <TableCell align="left">Bank Account</TableCell>
-                    <TableCell align="left">Receiver</TableCell>
-                    <TableCell align="left">Receiver Phone</TableCell>
-                    <TableCell align="left">Sender Phone</TableCell>
+                    <TableCell align="left">Fee</TableCell>
+                    <TableCell align="left">Total</TableCell>
+                    <TableCell align="left">Sender</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -106,22 +99,22 @@ export default function Row(props) {
                     </TableCell>
                     <TableCell align="left">
                       <Edit
-                        id={id}
+                        id={no}
                         name="Bank Account"
                         value={row["Bank Account"]}
                       />
                     </TableCell>
                     <TableCell align="left">
-                      <Edit id={id} name="Receiver" value={row["Receiver"]} />
+                    {row["Fee"]}
                     </TableCell>
                     <TableCell align="left">
                       <Edit
-                        id={id}
+                        id={no}
                         name="Receiver Phone"
-                        value={row["Receiver Phone"]}
+                        value={row["Total"]}
                       />
                     </TableCell>
-                    <TableCell align="left">{row["Sender Phone"]}</TableCell>
+                    <TableCell align="left">{row["Sender"]}</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>

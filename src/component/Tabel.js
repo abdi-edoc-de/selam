@@ -18,10 +18,9 @@ export default function TableSelam(props) {
             <TableCell />
             <TableCell align="left">No</TableCell>
             <TableCell align="left">Bank</TableCell>
-            <TableCell align="left">Fee</TableCell>
-            <TableCell align="left">NetReciver</TableCell>
+            <TableCell align="left">Receiver</TableCell>
+            <TableCell align="left">Sender Phone</TableCell>
             <TableCell align="left">Rate</TableCell>
-            <TableCell align="left">Total</TableCell>
             <TableCell align="left">TotalReciver</TableCell>
             <TableCell align="left">Assign</TableCell>
             <TableCell align="left">Urgency</TableCell>

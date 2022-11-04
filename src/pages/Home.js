@@ -43,6 +43,7 @@ export default function Home() {
       d.forEach((item, ind) => {
         item["Assign"] = "Hold";
         item['Speed'] = "Regular"
+        console.log(ind)
         rows[ind] = item;
         if (!banks.includes(item.Bank)) {
           banks.push(item.Bank);
