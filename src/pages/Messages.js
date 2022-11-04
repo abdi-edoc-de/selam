@@ -53,7 +53,7 @@ export default function Div() {
         if (nums === 0) {
           st += `Date: ${rows[element]["Date"]}\n\n`;
         }
-        if (nums % 7 === 0 && nums !== 0) {
+        if (nums % 6 === 0 && nums !== 0) {
           res.push(st);
           st = "";
         }
