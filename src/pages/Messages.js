@@ -60,7 +60,7 @@ export default function Div() {
         if (rows[element]["Speed"] !== "Regular") {
           st += `${rows[element]["Speed"]} \n`;
         }
-        st += `${nums + 1}:- ${rows[element]["Receiver"]} \n`;
+        st += `${nums + 1}:- ${rows[element]["Sender Phone"]} \n${rows[element]["Receiver"]} \n`;
         if (rows[element]["Receiver Phone"].length >= 10) {
           st += `${rows[element]["Receiver Phone"]} \n`;
         }
