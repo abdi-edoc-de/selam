@@ -65,8 +65,9 @@ const slice = createSlice({
         },
         filter : (greet, action) => {
             let res = {}
-            const {min, max, bank, banks} = action.payload
+            const {min, max, bank, banks, phone} = action.payload
             for (const [key, value] of Object.entries(greet.rows) ){
+                
                 if (min && value['Total Pay Receiver'] < min) {
                     continue
                 } 
@@ -74,6 +75,9 @@ const slice = createSlice({
                     continue
                 }
                 if (bank !== 0 && value['Bank'] !== banks[bank]){
+                    continue
+                }
+                if (phone && ""+value['Sender Phone'] !== ""+phone){
                     continue
                 }
                 res[key] = value

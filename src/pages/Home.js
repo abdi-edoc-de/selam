@@ -38,6 +38,7 @@ export default function Home() {
       };
     });
     promise.then((d) => {
+      d.sort((a, b) => (a['Total Pay Receiver']>b['Total Pay Receiver']?-1:1))
       const rows = {};
       const banks = [];
       d.forEach((item, ind) => {

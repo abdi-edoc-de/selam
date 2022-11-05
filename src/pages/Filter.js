@@ -30,13 +30,14 @@ export default function Home() {
   const rows = useSelector((state) => getFill(state));
   const [max, setMax] = React.useState();
   const banks = ["None", ...useSelector((state) => getBanks(state))];
+  const [phone, setPhone] = React.useState("")
   React.useEffect(() => {
     handleFilter(ro);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ro]);
   const dispatch = useDispatch();
   const handleFilter = (ro) => {
-    dispatch(filter({ min: min, max: max, bank: bank, banks: banks }));
+    dispatch(filter({ min: min, max: max, bank: bank, banks: banks , phone:phone}));
   };
   return (
     <div>
@@ -92,6 +93,20 @@ export default function Home() {
               </Select>
             </FormControl>
           </Grid>
+          <Grid item xs={12}>
+            <TextField
+              sx={{ borderRadius: 100, my: 1 }}
+              className="inputRounded"
+              id="standard-name"
+              label="Sender Phone"
+              name="sender_phone"
+              fullWidth
+              value={phone}
+              onChange={(e) => {
+                setPhone(e.target.value);
+              }}
+            />
+          </Grid>
         </Grid>
 
         <Box
@@ -113,7 +128,6 @@ export default function Home() {
               handleFilter(ro);
             }}
           >
-            {" "}
             Filter
           </Button>
         </Box>
