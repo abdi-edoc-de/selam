@@ -13,13 +13,29 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ControllableStates from "./Dropdown";
 import { getColors } from "../store/greet";
 import { useSelector } from "react-redux";
-import Edit from "../component/Editable";
 import UrgentContr from "./Urgent";
 import AlertDialogDelete from "./Delete";
+import CheckIcon from "@mui/icons-material/Check";
+import EditIcon from "@mui/icons-material/Edit";
+import ClearIcon from "@mui/icons-material/Clear";
+import RowTextField from "./RowTextField";
+import { useDispatch } from "react-redux";
+import { editFilds } from "../store/greet"
+;
+
 export default function Row(props) {
+  const dispatch = useDispatch()
   const { row, id, no } = props;
   const [open, setOpen] = React.useState(false);
   const colors = useSelector((state) => getColors(state));
+  const [edit, setEdit] = React.useState(false);
+  const [bank, setBank] = React.useState(row["Bank"]);
+  const [birr, setBirr] = React.useState(row["Total Pay Receiver"]);
+  const [rate, setRate] = React.useState(row["Rate Change Receiver"]);
+  const [fee, setFee] = React.useState(row["Fee"]);
+  const [total, setTotal] = React.useState(row["Total"]);
+  const [name, setName] = React.useState(row["Receiver"]);
+  const [account, setAccount] = React.useState(row["Bank Account"]);
 
   return (
     <React.Fragment>
@@ -40,30 +56,17 @@ export default function Row(props) {
         </TableCell>
         <TableCell>{1 + parseInt(id)}</TableCell>
         <TableCell>
-          <Edit id={no} name="Bank" value={row["Bank"]} />
+          <RowTextField value={bank} edit={edit} set={setBank} size={20}/>
         </TableCell>
         <TableCell align="left">
-          <Edit id={no} name="Receiver" value={row["Receiver"]} />
-
+          <RowTextField value={name} edit={edit} set={setName} />
+        </TableCell>
+        <TableCell align="left">{row["Sender Phone"]}</TableCell>
+        <TableCell align="left">
+          <RowTextField value={rate} edit={edit} set={setRate} size={3}/>
         </TableCell>
         <TableCell align="left">
-          {row["Sender Phone"]}
-        </TableCell>
-        <TableCell align="left">
-          <Edit
-            id={no}
-            name="Rate Change Receiver"
-            type="number"
-            value={row["Rate Change Receiver"]}
-          />
-        </TableCell>
-        <TableCell align="left">
-          <Edit
-            id={no}
-            name="Total Pay Receiver"
-            type="number"
-            value={row["Total Pay Receiver"]}
-          />
+          <RowTextField value={birr} edit={edit} set={setBirr} size={10}/>
         </TableCell>
         <TableCell align="left">
           <ControllableStates assign={row.Assign} id={no} />
@@ -72,7 +75,46 @@ export default function Row(props) {
           <UrgentContr speed={row.Speed} id={no} />
         </TableCell>
         <TableCell align="left">
-          <AlertDialogDelete id={no} row={row} />
+          <div style={{ display: "inline-flex" }}>
+            <IconButton aria-label="expand row" size="small">
+              {edit ? (
+                <ClearIcon
+                  onClick={() => {
+                    setBank(row["Bank"]);
+                    setBirr(row["Total Pay Receiver"]);
+                    setRate(row["Rate Change Receiver"]);
+                    setFee(row["Fee"]);
+                    setTotal(row["Total"]);
+                    setAccount(row["Bank Account"]);
+                    setName(row["Receiver"]);
+                    setEdit(!edit);
+                  }}
+                />
+              ) : (
+                <EditIcon onClick={() => setEdit(!edit)} />
+              )}
+            </IconButton>
+            <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={() =>{
+                dispatch(editFilds({id:id, updates:[
+                  {
+                    "Total":total,
+                    "Receiver":name,
+                    "Bank Account":account,
+                    "Bank":bank,
+                    "Total Pay Receiver":birr,
+                    "Rate Change Receiver":rate,
+                    "Fee":fee
+                }
+                ]}))
+                setEdit(false)}}
+            >
+              <CheckIcon />
+            </IconButton>
+            <AlertDialogDelete id={no} row={row} />
+          </div>
         </TableCell>
       </TableRow>
       <TableRow>
@@ -98,21 +140,17 @@ export default function Row(props) {
                       {row["Date"]}
                     </TableCell>
                     <TableCell align="left">
-                      <Edit
-                        id={no}
-                        name="Bank Account"
-                        value={row["Bank Account"]}
+                      <RowTextField
+                        value={account}
+                        edit={edit}
+                        set={setAccount}
                       />
                     </TableCell>
                     <TableCell align="left">
-                    {row["Fee"]}
+                      <RowTextField value={fee} edit={edit} set={setFee} />
                     </TableCell>
                     <TableCell align="left">
-                      <Edit
-                        id={no}
-                        name="Receiver Phone"
-                        value={row["Total"]}
-                      />
+                      <RowTextField value={total} edit={edit} set={setTotal} />
                     </TableCell>
                     <TableCell align="left">{row["Sender"]}</TableCell>
                   </TableRow>

@@ -85,16 +85,10 @@ const slice = createSlice({
             greet.fill = res
         },
         editFilds: (greet, action) => {
-            console.log(action.payload)
-            const {id, name, value} = action.payload
-            console.log(typeof(id))
-            console.log(greet.rows[1]===undefined)
-            // for (const [key , _] of Object.entries(greet.rows)){
-            //     console.log(key)
-            //     if (key === id)console.log(id, key)
-            // }
-            greet.rows[id][name] = value
-            console.log(greet.rows[id][name])
+            const {id, updates} = action.payload
+            updates.forEach(item=>{
+                Object.entries(item).forEach(([name, value])=>greet.rows[id][name] = value)
+            })
         },
         setUrgency : (greet, action) => {
             const {id, value} = action.payload
