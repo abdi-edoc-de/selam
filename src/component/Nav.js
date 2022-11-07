@@ -32,8 +32,8 @@ function ResponsiveAppBar() {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
-        <Toolbar style={{ textDecoration: 'none' }} color="common.white" component={Link} to="/" disableGutters>
-          <AdbIcon color="common.white" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+        <Toolbar style={{ textDecoration: 'none' }} color="common.white"  disableGutters>
+          <AdbIcon component={Link} to="/" color="common.white" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
           color="common.white"
             variant="h6"

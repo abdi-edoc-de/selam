@@ -15,16 +15,15 @@ import { getColors } from "../store/greet";
 import { useSelector } from "react-redux";
 import UrgentContr from "./Urgent";
 import AlertDialogDelete from "./Delete";
-import CheckIcon from "@mui/icons-material/Check";
 import EditIcon from "@mui/icons-material/Edit";
 import ClearIcon from "@mui/icons-material/Clear";
 import RowTextField from "./RowTextField";
 import { useDispatch } from "react-redux";
-import { editFilds } from "../store/greet"
-;
+import BeenhereIcon from "@mui/icons-material/Beenhere";
+import { editFilds } from "../store/greet";
 
 export default function Row(props) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { row, id, no } = props;
   const [open, setOpen] = React.useState(false);
   const colors = useSelector((state) => getColors(state));
@@ -56,17 +55,17 @@ export default function Row(props) {
         </TableCell>
         <TableCell>{1 + parseInt(id)}</TableCell>
         <TableCell>
-          <RowTextField value={bank} edit={edit} set={setBank} size={20}/>
+          <RowTextField value={bank} edit={edit} set={setBank} size={20} />
         </TableCell>
         <TableCell align="left">
           <RowTextField value={name} edit={edit} set={setName} />
         </TableCell>
         <TableCell align="left">{row["Sender Phone"]}</TableCell>
         <TableCell align="left">
-          <RowTextField value={rate} edit={edit} set={setRate} size={3}/>
+          <RowTextField value={rate} edit={edit} set={setRate} size={3} />
         </TableCell>
         <TableCell align="left">
-          <RowTextField value={birr} edit={edit} set={setBirr} size={10}/>
+          <RowTextField value={birr} edit={edit} set={setBirr} size={10} />
         </TableCell>
         <TableCell align="left">
           <ControllableStates assign={row.Assign} id={no} />
@@ -79,6 +78,7 @@ export default function Row(props) {
             <IconButton aria-label="expand row" size="small">
               {edit ? (
                 <ClearIcon
+                  sx={{ color: "#DC143C" }}
                   onClick={() => {
                     setBank(row["Bank"]);
                     setBirr(row["Total Pay Receiver"]);
@@ -91,27 +91,36 @@ export default function Row(props) {
                   }}
                 />
               ) : (
-                <EditIcon onClick={() => setEdit(!edit)} />
+                <EditIcon
+                  sx={{ color: "#2E8BC0" }}
+                  onClick={() => setEdit(!edit)}
+                />
               )}
             </IconButton>
             <IconButton
               aria-label="expand row"
               size="small"
-              onClick={() =>{
-                dispatch(editFilds({id:id, updates:[
-                  {
-                    "Total":total,
-                    "Receiver":name,
-                    "Bank Account":account,
-                    "Bank":bank,
-                    "Total Pay Receiver":birr,
-                    "Rate Change Receiver":rate,
-                    "Fee":fee
-                }
-                ]}))
-                setEdit(false)}}
+              onClick={() => {
+                dispatch(
+                  editFilds({
+                    id: id,
+                    updates: [
+                      {
+                        Total: total,
+                        Receiver: name,
+                        "Bank Account": account,
+                        Bank: bank,
+                        "Total Pay Receiver": birr,
+                        "Rate Change Receiver": rate,
+                        Fee: fee,
+                      },
+                    ],
+                  })
+                );
+                setEdit(false);
+              }}
             >
-              <CheckIcon />
+              <BeenhereIcon sx={{ color: "#00FF00" }} />
             </IconButton>
             <AlertDialogDelete id={no} row={row} />
           </div>

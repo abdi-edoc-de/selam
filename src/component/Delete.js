@@ -25,7 +25,7 @@ export default function AlertDialog(props) {
 
   return (
     <div>
-      <IconButton aria-label="delete" onClick={handleClickOpen}>
+      <IconButton aria-label="delete" sx={{color:"#DC143C"}} onClick={handleClickOpen}>
         <DeleteIcon />
       </IconButton>
       <Dialog
