@@ -21,7 +21,6 @@ import RowTextField from "./RowTextField";
 import { useDispatch } from "react-redux";
 import BeenhereIcon from "@mui/icons-material/Beenhere";
 import { editFilds } from "../store/greet";
-
 export default function Row(props) {
   const dispatch = useDispatch();
   const { row, id, no } = props;
