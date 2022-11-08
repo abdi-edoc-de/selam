@@ -116,13 +116,6 @@ export default function Row(props) {
                     ],
                   })
                 );
-                setBank(row["Bank"]);
-                setBirr(row["Total Pay Receiver"]);
-                setRate(row["Rate Change Receiver"]);
-                setFee(row["Fee"]);
-                setTotal(row["Total"]);
-                setAccount(row["Bank Account"]);
-                setName(row["Receiver"]);
                 setEdit(false);
                 
               }}
