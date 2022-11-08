@@ -38,7 +38,7 @@ export default function NameSelelction() {
 
   }
   return (
-    <div style={{ width: "100%" }}>
+    <div style={{ width: "100%" }} sx={{mt:3}} >
       <Snackbar
       anchorOrigin={{ vertical:"top", horizontal:"center" }}
        open={open} autoHideDuration={6000} onClose={handleClose}>

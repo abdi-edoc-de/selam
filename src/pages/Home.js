@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import AddOrder from "../component/AddOrder";
 import {
   setRows,
   getRows,
@@ -57,8 +58,9 @@ export default function Home() {
   };
   return (
     <div>
-      <Container sx={{ mt: 4 }} maxWidth="xl">
+      <Container sx={{ mt: 5, pt:5 }} maxWidth="xl">
         <NameSelelction assign />
+
         <Box
           sx={{ my: 4, width: "100%" }}
           display="flex"
@@ -92,6 +94,7 @@ export default function Home() {
             <Chip label={orders} />
           </Typography>
         </Divider>
+        <AddOrder/>
         <TableRow rows={rows} />
       </Container>
     </div>

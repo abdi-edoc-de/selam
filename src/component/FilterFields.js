@@ -32,7 +32,7 @@ export default function Home() {
   };
   return (
     <div>
-        <Grid container spacing={2}>
+        <Grid sx={{mt:4}} container spacing={2}>
           <Grid item xs={6}>
             <TextField
               sx={{ borderRadius: 100, my: 1 }}

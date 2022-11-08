@@ -46,9 +46,9 @@ export default function CircularIndeterminate() {
     justifyContent="center" display="flex" 
     >
       <FacebookCircularProgress  
-      size='40vh' 
+      size='20vh' 
       style = {{
-        marginTop:"50%"
+        marginTop:"200%"
       }}
       />
     </Box>

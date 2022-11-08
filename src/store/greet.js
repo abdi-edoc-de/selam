@@ -21,14 +21,15 @@ const slice = createSlice({
         rowColors : {Hold : "#fffff"},
         fileName : 'Not Selected',
         banks : [],
-        fill : {}
+        fill : {},
+        id : 0,
     },
     reducers: {
         sayGreet: (greet, action) => {
             greet.say = "hello selam" + action.payload.name
         },
         setRows : (greet , action) => {
-
+            greet.id = Object.keys(action.payload.rows).length + 1
             greet.rows = action.payload.rows
             greet.fill = action.payload.rows
             greet.assignOrders = {"Hold":[]}
@@ -38,6 +39,14 @@ const slice = createSlice({
             greet.names.forEach(name => {
                 greet.assignOrders[name] = []
             })
+        },
+        addRow: (greet, action) => {
+            greet.rows[greet.id] = action.payload.row
+            greet.id += 1
+
+            if (!greet.banks.includes(action.payload.row.Bank)){
+                greet.banks.push(action.payload.row.Bank)
+            }
         },
         addName : (greet , action) => {
             greet.names.push(action.payload.name)
@@ -104,7 +113,7 @@ const slice = createSlice({
 })
 
 export default slice.reducer
-export const {sayGreet, setRows, addName, deleteRow, removeName, setAssign, setFileName, setBanks, editFilds, filter, setUrgency} = slice.actions
+export const {sayGreet, setRows, addName, deleteRow, removeName, setAssign, setFileName, setBanks, editFilds, filter, setUrgency, addRow} = slice.actions
 export const getGreet = createSelector(
     state => state.entities.greet,
     greet => greet.say

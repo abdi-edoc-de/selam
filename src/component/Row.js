@@ -102,21 +102,29 @@ export default function Row(props) {
               onClick={() => {
                 dispatch(
                   editFilds({
-                    id: id,
+                    id: no,
                     updates: [
                       {
-                        Total: total,
-                        Receiver: name,
+                        "Total": total,
+                        "Receiver": name,
                         "Bank Account": account,
-                        Bank: bank,
+                        "Bank": bank,
                         "Total Pay Receiver": birr,
                         "Rate Change Receiver": rate,
-                        Fee: fee,
+                        "Fee": fee,
                       },
                     ],
                   })
                 );
+                setBank(row["Bank"]);
+                setBirr(row["Total Pay Receiver"]);
+                setRate(row["Rate Change Receiver"]);
+                setFee(row["Fee"]);
+                setTotal(row["Total"]);
+                setAccount(row["Bank Account"]);
+                setName(row["Receiver"]);
                 setEdit(false);
+                
               }}
             >
               <BeenhereIcon sx={{ color: "#00FF00" }} />
