@@ -84,7 +84,7 @@ export default function Div() {
 
   return (
     <>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Box sx={{ borderBottom: 1, borderColor: "divider" , pt:5, mt:5 }}>
         <Tabs
           value={value}
           onChange={handleChange}

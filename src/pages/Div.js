@@ -95,12 +95,15 @@ export default function Div() {
     return res;
   };
   return (
+    <div >
     <Box
       sx={{
         flexGrow: 1,
         bgcolor: "background.paper",
         display: "flex",
         height: "90vh",
+        pt:5,
+        mt:5,
       }}
     >
       <Tabs
@@ -127,5 +130,6 @@ export default function Div() {
         </TabPanel>
       ))}
     </Box>
+    </div>
   );
 }
