@@ -61,9 +61,12 @@ export default function Div() {
           st += `${rows[element]["Speed"]} \n`;
         }
         st += `${nums + 1}:- ${rows[element]["Sender Phone"]} \n${rows[element]["Receiver"]} \n`;
-        if (rows[element]["Receiver Phone"].length >= 10) {
-          st += `${rows[element]["Receiver Phone"]} \n`;
-        }
+const receiverPhone = rows[element]["Receiver Phone"];
+const receiverPhoneStr = receiverPhone == null ? "" : String(receiverPhone);
+
+if (receiverPhoneStr.length >= 10) {
+  st += `${receiverPhoneStr}\n`;
+}
         st += `${rows[element]["Bank"]} \n${
           rows[element]["Bank Account"]
         } \n${dollarUSLocale.format(

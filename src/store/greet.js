@@ -53,19 +53,54 @@ const slice = createSlice({
             greet.rowColors[action.payload.name] = getRandomColor()
             greet.assignOrders[action.payload.name] = []
         },
-        removeName : (greet , action) => {
-            greet.names = greet.names.filter(name => name !== action.payload.name)
-            greet.assignOrders[action.payload.name].forEach(id =>{
-                 if (greet.rows[id]){greet.rows[id].Assign = "Hold"}})
-            delete greet.assignOrders[action.payload.name]
-        },
-        setAssign : (greet, action) => {
-            const {id, name} = action.payload
-            
-            greet.assignOrders[greet.rows[id].Assign] = greet.assignOrders[greet.rows[id].Assign].filter(ord => ord !== id)
-            greet.rows[id].Assign = name
-            greet.assignOrders[name].push(id)
-        },
+removeName: (greet, action) => {
+  const name = String(action.payload.name ?? "").trim();
+  greet.names = greet.names.filter((n) => n !== name);
+
+  const ids = greet.assignOrders?.[name];
+  if (!Array.isArray(ids)) {
+    delete greet.assignOrders?.[name];
+    delete greet.rowColors?.[name];
+    return;
+  }
+
+  ids.forEach((id) => {
+    if (greet.rows?.[id]) greet.rows[id].Assign = "Hold";
+    if (!greet.assignOrders.Hold) greet.assignOrders.Hold = [];
+    if (!greet.assignOrders.Hold.includes(id)) greet.assignOrders.Hold.push(id);
+  });
+
+  delete greet.assignOrders[name];
+  delete greet.rowColors[name];
+},
+setAssign: (greet, action) => {
+  let { id, name } = action.payload;
+
+  // normalize name to avoid "Bob" vs "Bob " bugs
+  name = String(name ?? "Hold").trim() || "Hold";
+
+  const row = greet.rows?.[id];
+  if (!row) return;
+
+  const prev = String(row.Assign ?? "Hold").trim() || "Hold";
+
+  // Ensure assignOrders exists
+  if (!greet.assignOrders) greet.assignOrders = {};
+
+  // Ensure buckets exist
+  if (!Array.isArray(greet.assignOrders[prev])) greet.assignOrders[prev] = [];
+  if (!Array.isArray(greet.assignOrders[name])) greet.assignOrders[name] = [];
+  if (!Array.isArray(greet.assignOrders.Hold)) greet.assignOrders.Hold = [];
+
+  // Remove from previous bucket
+  greet.assignOrders[prev] = greet.assignOrders[prev].filter((ord) => ord !== id);
+
+  // Assign and add to new bucket (avoid duplicates)
+  row.Assign = name;
+  if (!greet.assignOrders[name].includes(id)) {
+    greet.assignOrders[name].push(id);
+  }
+},
         setFileName : (greet, action) => {
             greet.fileName = action.payload.fileName
         },
@@ -103,12 +138,16 @@ const slice = createSlice({
             const {id, value} = action.payload
             greet.rows[id]["Speed"] = value
         },
-        deleteRow : (greet, action) => {
-            delete greet.rows[action.payload.id]
-            if (greet.fill[action.payload.id]) {
-                delete greet.fill[action.payload.id]
-            }
-        }
+        deleteRow: (greet, action) => {
+  const id = String(action.payload.id);
+
+  Object.keys(greet.assignOrders ?? {}).forEach((bucket) => {
+    greet.assignOrders[bucket] = (greet.assignOrders[bucket] ?? []).filter((x) => x !== id);
+  });
+
+  delete greet.rows[id];
+  delete greet.fill[id];
+}
     }
 })
 
